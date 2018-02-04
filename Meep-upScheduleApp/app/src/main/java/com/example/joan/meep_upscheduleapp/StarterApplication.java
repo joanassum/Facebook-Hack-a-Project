@@ -35,6 +35,8 @@ public class StarterApplication extends Application {
             .build()
     );
 
+    /*
+    //for testing parse server working correctly
     ParseObject object = new ParseObject("ExampleObject");
     object.put("myNumber", "123");
     object.put("myString", "rob");
@@ -49,7 +51,7 @@ public class StarterApplication extends Application {
         }
       }
     });
-
+    */
 
     //ParseUser.enableAutomaticUser();
 
