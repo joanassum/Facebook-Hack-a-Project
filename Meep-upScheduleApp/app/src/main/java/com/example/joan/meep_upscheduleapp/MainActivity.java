@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle("Meet-Up/Call Schedule App");
+        setTitle("Meet-Up");
 
         EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         passwordEditText.setOnKeyListener(this);
