@@ -34,12 +34,15 @@ public class FriendsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case (R.id.addNewFriends):
+                intent = new Intent(getApplicationContext(), AddFriendsActivity.class);
+                startActivity(intent);
                 break;
             case (R.id.logout):
                 ParseUser.logOut();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 break;
             default:
