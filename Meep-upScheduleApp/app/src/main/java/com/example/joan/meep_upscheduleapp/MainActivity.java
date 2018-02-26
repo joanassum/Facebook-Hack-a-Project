@@ -4,6 +4,7 @@ package com.example.joan.meep_upscheduleapp;
     Code had been reuse from The Complete Android-N-Developer Course
  */
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         imageView.setOnClickListener(this);
 
         if (ParseUser.getCurrentUser() != null) {
-            //TODO: if logged in already
+            Intent intent = new Intent(getApplicationContext(), FriendsActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                         public void done(ParseException e) {
                             if (e == null) {
                                 Log.i("Sign Up", "Successful");
-                                //TODO: logged in
+                                Intent intent = new Intent(getApplicationContext(), FriendsActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -117,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                                 public void done(ParseUser user, ParseException e) {
                                     if (user != null) {
                                         Log.i("Login", "Successful");
-                                        //TODO: logged in
+                                        Intent intent = new Intent(getApplicationContext(), FriendsActivity.class);
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
