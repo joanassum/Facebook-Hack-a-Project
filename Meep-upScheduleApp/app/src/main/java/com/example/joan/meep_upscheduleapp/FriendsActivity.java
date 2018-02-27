@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,6 +28,7 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
+        menu.clear();
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.friends_menu, menu);
 
@@ -52,6 +55,11 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
@@ -59,6 +67,15 @@ public class FriendsActivity extends AppCompatActivity {
         setTitle("Friends");
 
         mFriendsListView = (ListView) findViewById(R.id.friendsListView);
+
+        mFriendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), InvitationHistoryActivity.class);
+                intent.putExtra("username", mFriends.get(position));
+                startActivity(intent);
+            }
+        });
 
         mFriends.clear();
 
