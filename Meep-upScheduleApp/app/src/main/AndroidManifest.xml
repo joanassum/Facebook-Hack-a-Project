@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".FriendsActivity">
+        </activity>
+        <activity android:name=".AddFriendsActivity">
+        </activity>
+        <activity android:name=".InvitationHistoryActivity">
+        </activity>
+        <activity android:name=".NewInvitationDateActivity">
+        </activity>
+        <activity android:name=".NewInvitationTimeActivity">
+        </activity>
+        <activity android:name=".NewInvitationActivity">
+        </activity>
+        <activity android:name=".NotReplyedInvitationActivity">
+        </activity>
+        <activity android:name=".NewGroupActivity">
+        </activity>
     </application>
 
 </manifest>
