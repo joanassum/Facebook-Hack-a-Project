@@ -34,6 +34,10 @@
         </activity>
         <activity android:name=".NewInvitationActivity">
         </activity>
+        <activity android:name=".NotReplyedInvitationActivity">
+        </activity>
+        <activity android:name=".NewGroupActivity">
+        </activity>
     </application>
 
 </manifest>

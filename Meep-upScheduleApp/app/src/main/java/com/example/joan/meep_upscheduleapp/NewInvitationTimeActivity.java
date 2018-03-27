@@ -15,6 +15,8 @@ public class NewInvitationTimeActivity extends AppCompatActivity {
     int mYear;
     int mMonth;
     int mDay;
+    boolean mIsGroup;
+    String mGroupId;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -30,6 +32,10 @@ public class NewInvitationTimeActivity extends AppCompatActivity {
         intent.putExtra("day", mDay);
         intent.putExtra("hour", hour);
         intent.putExtra("minutes", minutes);
+        intent.putExtra("isGroup", mIsGroup);
+        if (mIsGroup) {
+            intent.putExtra("groupId", mGroupId);
+        }
         startActivity(intent);
 
     }
@@ -46,5 +52,10 @@ public class NewInvitationTimeActivity extends AppCompatActivity {
         mYear = intent.getIntExtra("year", 0);
         mMonth = intent.getIntExtra("month", 0);
         mDay = intent.getIntExtra("day", 0);
+        mIsGroup = intent.getBooleanExtra("isGroup", false);
+        if (mIsGroup) {
+            mGroupId = intent.getStringExtra("groupId");
+        }
+
     }
 }

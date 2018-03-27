@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Add new friends" android:id="@+id/addNewFriends"/>
+    <item android:title="New Group" android:id="@+id/newGroup" />
     <item android:title="Logout" android:id="@+id/logout" />
 
 </menu>

@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Date;
+import java.util.List;
 
 public class NewInvitationActivity extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class NewInvitationActivity extends AppCompatActivity {
     int mDay;
     int mHour;
     int mMinutes;
+    boolean mIsGroup;
+    String mGroupId;
 
     public void onClick(View view) {
         Date date = new Date(mYear - 1900, mMonth, mDay, mHour, mMinutes);
@@ -30,6 +35,9 @@ public class NewInvitationActivity extends AppCompatActivity {
         invitation.put("recipient", mFrdSelected);
         invitation.put("meetUpDate", date);
         invitation.put("state", "NotReplyed");
+        if (mIsGroup) {
+            invitation.put("groupId", mGroupId);
+        }
 
         invitation.saveInBackground(new SaveCallback() {
             @Override
@@ -50,7 +58,7 @@ public class NewInvitationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_invitation);
 
-        TextView textView = (TextView) findViewById(R.id.ConfirmTextView);
+        final TextView textView = (TextView) findViewById(R.id.ConfirmTextView);
 
         Intent intent = getIntent();
         mFrdSelected = intent.getStringExtra("username");
@@ -59,9 +67,31 @@ public class NewInvitationActivity extends AppCompatActivity {
         mDay = intent.getIntExtra("day", 0);
         mHour = intent.getIntExtra("hour", 0);
         mMinutes = intent.getIntExtra("minutes", 0);
-
-        textView.setText("Date: " + mDay + "/" + mMonth + "/" + mYear + "\n"
-                + "Time: " + mHour + " : " + mMinutes + "\n"
-                + "To: " + mFrdSelected);
+        mIsGroup = intent.getBooleanExtra("isGroup", false);
+        if (mIsGroup) {
+            mGroupId = intent.getStringExtra("groupId");
+            ParseQuery<ParseObject> query2 = new ParseQuery<>("Groups");
+            query2.whereEqualTo("objectId", mGroupId);
+            query2.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() == 1) {
+                            for (ParseObject group : objects) {
+                                textView.setText("Date: " + mDay + "/" + mMonth + "/" + mYear + "\n"
+                                        + "Time: " + mHour + " : " + mMinutes + "\n"
+                                        + "To: " + group.getList("users").toString());
+                            }
+                        }
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            textView.setText("Date: " + mDay + "/" + mMonth + "/" + mYear + "\n"
+                    + "Time: " + mHour + " : " + mMinutes + "\n"
+                    + "To: " + mFrdSelected);
+        }
     }
 }
